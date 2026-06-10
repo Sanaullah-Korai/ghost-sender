@@ -122,9 +122,7 @@ curl -X POST http://localhost:8080/send \
 
 ## Requirements
 
-- Python 3.6+ (stdlib only)
-- Outbound TCP port 25 (AWS EC2: yes, Oracle: blocked, Residential: usually blocked)
-- Clean IP (not on Spamhaus — request removal at https://check.spamhaus.org)
+- Python
 
 ---
 
