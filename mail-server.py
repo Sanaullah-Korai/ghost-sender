@@ -160,7 +160,7 @@ pre{{background:#111;padding:10px;border-radius:8px;font-size:12px;overflow-x:au
 <p class="gray">Sends spoofed emails direct to M365 EOP bypassing MX/SPF/DKIM/DMARC</p>
 <form method="POST" action="/send">
 <label>From (spoofed)</label><input name="from" value="security@test.com">
-<label>To (comma-separated)</label><input name="to" value="OISSG@test.com"><label>Cc (comma-separated)</label><input name="cc" placeholder="user2@test.com, user3@test.com">
+<label>To (comma-separated)</label><input name="to" value="test@test.com"><label>Cc (comma-separated)</label><input name="cc" placeholder="user2@test.com, user3@test.com">
 <label>Subject</label><input name="subject" value="Ghost Sender PoC">
 <label>Body</label><textarea name="body" rows="6">SPF=FAIL DKIM=NONE DMARC=REJECT - delivered via direct M365 EOP connection.</textarea>
 <button type="submit">Send</button>
@@ -184,7 +184,7 @@ pre{{background:#111;padding:10px;border-radius:8px;font-size:12px;overflow-x:au
                 params = json.loads(body)
 
             from_addr = params.get('from', 'security@test.com')
-            to_raw = params.get('to', 'OISSG@test.com')
+            to_raw = params.get('to', 'test@test.com')
             cc_raw = params.get('cc', '')
             subject = params.get('subject', 'Test')
             body_text = params.get('body', 'Test email')
