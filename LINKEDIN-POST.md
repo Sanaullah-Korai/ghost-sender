@@ -1,6 +1,8 @@
-Your email gateway might not be protecting you — and it's not the gateway's fault.
+I spent hours reviewing a client's email setup last week. SPF, DKIM, DMARC — all correct. MX pointing to their gateway. Everything was in order.
 
-Last week I tested a setup that looked perfect: Forcepoint MX, SPF -all, DKIM configured, DMARC p=reject. Every DNS record was correct.
+Then I tried something simple. One openssl command directly to Exchange Online.
+
+The email went straight to the inbox. No authentication. No filtering. No warning.
 
 But Exchange Online also accepts mail directly on port 25 — from any IP, with no authentication. If no partner connector or transport rule is configured, Microsoft assumes the gateway already filtered everything and delivers the mail as-is.
 

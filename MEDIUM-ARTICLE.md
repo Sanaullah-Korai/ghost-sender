@@ -1,6 +1,6 @@
-# Your SPF, DKIM, and DMARC Are Useless If Exchange Online Is Misconfigured
+# I Thought Our Email Security Was Solid. Then I Tried One Command.
 
-## Most security teams set up email authentication and call it done. But Exchange Online has a default behavior that silently accepts mail from anywhere — completely skipping your gateway, your filters, and every authentication check. Here's how to find it and fix it.
+## SPF, DKIM, and DMARC were all configured. The gateway was in place. The DNS records were correct. But a single TCP connection to Exchange Online exposed a gap that made all of it irrelevant.
 
 ---
 
