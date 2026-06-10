@@ -111,9 +111,9 @@ sequenceDiagram
     EOP-->>A: 250-STARTTLS
     A->>EOP: STARTTLS
     Note over A,EOP: TLS established
-    A->>EOP: MAIL FROM:&lt;ceo@domain.com&gt;
+    A->>EOP: MAIL FROM:<ceo@domain.com>
     EOP-->>A: 250 2.1.0 Sender OK
-    A->>EOP: RCPT TO:&lt;employee@domain.com&gt;
+    A->>EOP: RCPT TO:<employee@domain.com>
     EOP-->>A: 250 2.1.5 Recipient OK
     A->>EOP: DATA
     EOP-->>A: 354 Start mail input
