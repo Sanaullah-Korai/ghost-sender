@@ -29,15 +29,32 @@ When an organization uses Exchange Online behind a third-party email gateway (ex
                      (Bypasses MX!)          [X] No SPF check
                                              [X] No DKIM check
                                              [X] No DMARC check
+                                             [X] No DLP scanning
+                                             [X] No content filtering
+                                             [X] No attachment scanning
                                              [X] No warning banner
 ```
 
-**Why:** Exchange Online, when fronted by an external MX, treats ALL inbound mail as "already filtered" and does NOT perform its own SPF/DKIM/DMARC enforcement. The attacker opens a TCP connection directly to `domain-com.mail.protection.outlook.com:25` and delivers email as if it came through the trusted gateway path.
+**Why:** Exchange Online, when fronted by an external MX, treats ALL inbound mail as "already filtered" and does NOT perform its own SPF/DKIM/DMARC enforcement. The attacker opens a TCP connection directly to `domain-com.mail.protection.outlook.com:25`, completely bypassing the MX gateway and all its defenses.
+
+### MX Gateway — Evaded Entirely
+
+The external MX (e.g. Forcepoint, Proofpoint, Mimecast) is the first layer of defense and handles:
+
+- **DLP** — Data Loss Prevention
+- **Content filtering** — policy enforcement, keyword blocking
+- **Attachment scanning** — malware sandboxing, file type blocking
+- **URL rewriting** — link protection, click-time analysis
+- **Anti-spam/phishing** — reputation checks, heuristics
+- **SPF/DKIM/DMARC** — email authentication
+
+Ghost Sender bypasses **all of these**. The email never touches the MX gateway. Exchange Online receives it directly, considers it "pre-filtered", and delivers it to the inbox without question.
 
 ### What Gets Bypassed
 
-| Mechanism | Configuration | Result |
-|-----------|--------------|--------|
+| Mechanism | Purpose | Result |
+|-----------|---------|--------|
+| **MX Gateway** | DLP, content filtering, attachment scanning | **Bypassed entirely** — direct to M365 |
 | **SPF** | `-all` (hard fail) | **Ignored** — no check performed |
 | **DKIM** | Signed by Microsoft | **Ignored** — no signature required |
 | **DMARC** | `p=reject; aspf=s; adkim=s` | **Ignored** — not evaluated |
